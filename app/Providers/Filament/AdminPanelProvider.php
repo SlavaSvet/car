@@ -55,9 +55,4 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ]);
     }
-
-    // public function canAccessPanel(Panel $panel): bool
-    // {
-    //     return $this->email == 'admin@admin.com';
-    // }
 }

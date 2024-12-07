@@ -2,8 +2,6 @@
 
 
 @section('content')
-  <section class="bg-white py-8">
-  </section>
   <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
     <div class="flex flex-wrap -mx-6">
       <!-- Image Section -->
@@ -22,11 +20,14 @@
           <p class="text-gray-600 mt-2 text-lg font-bold">Price: £{{ $car->price }}</p>
           
           <!-- Action Button -->
-          <div class="mt-6">
-              <a href="#" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600">
-                  Book Now
-              </a>
-          </div>
+          @if(auth()->check())
+            <div class="mt-6">
+                <a href="{{ route('cars.rental.form', $car->id) }}" class="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600">
+                    Book Now
+                </a>
+            </div>
+          @endif
+          
       </div>
   </div>
 

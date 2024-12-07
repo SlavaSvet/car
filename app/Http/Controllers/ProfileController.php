@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Rental;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public function index()
+    {
+        $rentals = Rental::where("user_id", Auth::user()->id)->get();
+
+        return view('profile', compact('rentals'));
+    }
+
     /**
      * Display the user's profile form.
      */

@@ -7,7 +7,7 @@
       <!--Slide 1-->
       <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
       <div class="carousel-item absolute opacity-0" style="height:50vh;">
-          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('{{ asset('images/banner/banner1.jpg') }}')">
 
               <div class="container mx-auto">
                   <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
@@ -24,7 +24,7 @@
       <!--Slide 2-->
       <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
       <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:50vh;">
-          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjM0MTM2fQ&auto=format&fit=crop&w=1600&q=80');">
+          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: url('{{ asset('images/banner/banner2.jpg') }}')">
 
               <div class="container mx-auto">
                   <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
@@ -41,7 +41,7 @@
       <!--Slide 3-->
       <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
       <div class="carousel-item absolute opacity-0" style="height:50vh;">
-          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom" style="background-image: url('https://images.unsplash.com/photo-1519327232521-1ea2c736d34d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">
+          <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom" style="background-image: url('{{ asset('images/banner/banner3.jpg') }}')">
 
               <div class="container mx-auto">
                   <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
@@ -71,7 +71,7 @@
   </div>
 </div>
 
-<!--	 
+<!--
 
 Alternatively if you want to just have a single hero
 
@@ -91,63 +91,103 @@ Alternatively if you want to just have a single hero
 
 -->
 
-<section class="bg-white py-8">
 
-  <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+        <!-- Heading & Filters -->
+        <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+            @foreach($cars as $car)
+                <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+                    <div class="h-56 w-full">
+                        <a href="{{ route('cars.show', $car->id) }}">
+                            <img class="hover:grow hover:shadow-lg" src="{{ $car->getImage()?->getUrl() }}">
 
-      <nav id="store" class="w-full z-30 top-0 px-6 py-1">
-          <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-2 py-3">
+                        </a>
+                    </div>
+                    <div class="pt-6">
+                        <div class="mb-4 flex items-center justify-between gap-4 pt-4">
+                            <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"> Add to favorites </span>
 
-              <a class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl " href="#">
-  Store
-</a>
+                            <div class="flex items-center justify-end gap-1">
 
-              <div class="flex items-center" id="store-nav-content">
 
-                  <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                      <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path d="M7 11H17V13H7zM4 7H20V9H4zM10 15H14V17H10z" />
-                      </svg>
-                  </a>
 
-                  <a class="pl-3 inline-block no-underline hover:text-black" href="#">
-                      <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z" />
-                      </svg>
-                  </a>
+                                <button type="button" data-tooltip-target="tooltip-add-to-favorites" class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                    <span class="sr-only"> Add to Favorites </span>
+                                    <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
+                                    </svg>
+                                </button>
+                                <div id="tooltip-add-to-favorites" role="tooltip" class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
+                                    Add to favorites
+                                    <div class="tooltip-arrow" data-popper-arrow=""></div>
+                                </div>
+                            </div>
+                        </div>
 
-              </div>
+                        <a href="{{ route('cars.show', $car->id) }}" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{{ $car->name }}</a>
+
+
+                        <ul class="mt-2 flex items-center gap-4">
+                            <li class="flex items-center gap-2">
+                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
+                                </svg>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Make: {{ $car->model->make->name }}</p>
+                            </li>
+
+                            <li class="flex items-center gap-2">
+                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                </svg>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Model: {{ $car->model->name }}</p>
+                            </li>
+
+                        </ul>
+                        <ul class="mt-2 flex items-center gap-4">
+                        <li class="flex items-center gap-2">
+                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                </svg>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vihicle: {{ $car->typeVihicle->name }}</p>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                </svg>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vin: {{ $car->vin }}</p>
+                            </li>
+
+                        </ul>
+                        <ul class="mt-2 flex items-center gap-4">
+                            <li class="flex items-center gap-2">
+                                <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                </svg>
+                                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Year: {{ $car->year }}</p>
+                            </li>
+                        </ul>
+
+
+                        <div class="mt-4 flex items-center justify-between gap-4">
+                            <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">£{{ $car->price }}</p>
+
+                            <a href="{{ route('cars.rental.form', $car->id) }}"  style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;" type="button" class="inline-flex items-center rounded-lg bg-info-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-info-800 focus:outline-none focus:ring-4  focus:ring-primary-300">
+                                <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
+                                </svg>
+                                Add to cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            @endforeach
+
         </div>
-      </nav>
-      
-        @foreach($cars as $car) 
-            <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-              <a href="{{ route('cars.show', $car->id) }}">
-                  <img class="hover:grow hover:shadow-lg" src="{{ $car->getImage()?->getUrl() }}">
-                  <div class="pt-3 flex items-center justify-between">
-                      <p class="">{{ $car->name }}</p>
-                      <svg class="h-6 w-6 fill-current text-gray-500 hover:text-black" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                          <path d="M12,4.595c-1.104-1.006-2.512-1.558-3.996-1.558c-1.578,0-3.072,0.623-4.213,1.758c-2.353,2.363-2.352,6.059,0.002,8.412 l7.332,7.332c0.17,0.299,0.498,0.492,0.875,0.492c0.322,0,0.609-0.163,0.792-0.409l7.415-7.415 c2.354-2.354,2.354-6.049-0.002-8.416c-1.137-1.131-2.631-1.754-4.209-1.754C14.513,3.037,13.104,3.589,12,4.595z M18.791,6.205 c1.563,1.571,1.564,4.025,0.002,5.588L12,18.586l-6.793-6.793C3.645,10.23,3.646,7.776,5.205,6.209 c0.76-0.756,1.754-1.172,2.799-1.172s2.035,0.416,2.789,1.17l0.5,0.5c0.391,0.391,1.023,0.391,1.414,0l0.5-0.5 C14.719,4.698,17.281,4.702,18.791,6.205z" />
-                      </svg>
-                  </div>
-                  <p class="pt-1 text-gray-900">Make: {{ $car->model->make->name }}</p>
-                  <p class="pt-1 text-gray-900">Model: {{ $car->model->name }}</p>
-                  <p class="pt-1 text-gray-900">Vihicle: {{ $car->typeVihicle->name }}</p>
-
-                  <p class="pt-1 text-gray-900">Price: £{{ $car->price }}</p>
-                  <p class="pt-1 text-gray-900">Vin: {{ $car->vin }}</p>
-                  <p class="pt-1 text-gray-900">Year: {{ $car->year }}</p>
-              </a>
-          </div>
-        @endforeach
-      
-
-      </div>
-    
-      {{ $cars->links() }}
-
+        {{ $cars->links() }}
+    </div>
 </section>
-
 <section class="bg-white py-8">
 
   <div class="container py-8 px-6 mx-auto">
@@ -158,9 +198,12 @@ About
 
       <p class="mt-8 mb-8">This template is inspired by the stunning nordic minimalist design - in particular:
           <br>
-          <a class="text-gray-800 underline hover:text-gray-900" href="http://savoy.nordicmade.com/" target="_blank">Savoy Theme</a> created by <a class="text-gray-800 underline hover:text-gray-900" href="https://nordicmade.com/">https://nordicmade.com/</a> and <a class="text-gray-800 underline hover:text-gray-900" href="https://www.metricdesign.no/" target="_blank">https://www.metricdesign.no/</a></p>
+          <a class="text-gray-800 underline hover:text-gray-900" href="http://savoy.nordicmade.com/" target="_blank">Savoy Theme</a>
+          <a class="text-gray-800 underline hover:text-gray-900" href="https://nordicmade.com/">https://nordicmade.com/</a>
+          <a class="text-gray-800 underline hover:text-gray-900" href="https://www.metricdesign.no/" target="_blank">https://www.metricdesign.no/</a>
+      </p>
 
-      <p class="mb-8">Lorem ipsum dolor sit amet, consectetur <a href="#">random link</a> adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Vitae aliquet nec ullamcorper sit. Nullam eget felis eget nunc lobortis mattis aliquam. In est ante in nibh mauris. Egestas congue quisque egestas diam in. Facilisi nullam vehicula ipsum a arcu. Nec nam aliquam sem et tortor consequat. Eget mi proin sed libero enim sed faucibus turpis in. Hac habitasse platea dictumst quisque. In aliquam sem fringilla ut. Gravida rutrum quisque non tellus orci ac auctor augue mauris. Accumsan lacus vel facilisis volutpat est velit egestas dui id. At tempor commodo ullamcorper a. Volutpat commodo sed egestas egestas fringilla. Vitae congue eu consequat ac.</p>
+      <p class="mb-8">Our company offers a convenient and reliable car rental service for all your needs. We provide a wide selection of modern vehicles, ranging from economical to premium models, perfectly suited for business trips, family vacations, or special occasions. All our cars undergo regular maintenance, ensuring safety and comfort on the road. We value your time, so the rental process is quick and hassle-free, with flexible options to match your budget. Our clients benefit from 24/7 support and a personalized approach. Discover the freedom of travel with our company — your trusted partner on the road!</p>
 
   </div>
 

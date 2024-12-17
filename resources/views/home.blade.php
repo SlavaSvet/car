@@ -95,7 +95,39 @@ Alternatively if you want to just have a single hero
 <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <!-- Heading & Filters -->
+        <div class="flex items-center justify-center p-4">
+            <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                    style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;"
+                    class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                    type="button">
+                Filter by type vihicle
+                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="dropdown" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700" >
+                <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
+                    Type Vihicle
+                </h6>
+                <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                    @foreach($typeVihicles as $typeVihicle)
+                        <li class="flex items-center">
+                            <input id="vh-{{ $typeVihicle->id }}" type="checkbox" value=""
+                                   class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+
+                            <label  for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                {{ $typeVihicle->name }}
+                            </label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
         <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+
             @foreach($cars as $car)
                 <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
                     <div class="h-56 w-full">
@@ -208,4 +240,25 @@ About
   </div>
 
 </section>
+
+<script>
+    document.querySelectorAll('[id^="vh-"]').forEach(function(element) {
+        element.addEventListener('click', function() {
+            const idValue = element.id.slice(3);
+            const currentUrl = new URL(window.location.href);
+            let vhParam = currentUrl.searchParams.get('vh');
+
+            if (vhParam) {
+                vhParam = `${vhParam},${idValue}`;
+            } else {
+                vhParam = idValue;
+            }
+
+            currentUrl.searchParams.set('vh', vhParam);
+            window.location.href = currentUrl.toString();
+        });
+    });
+</script>
 @endsection
+
+

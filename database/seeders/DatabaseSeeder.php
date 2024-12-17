@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedTypeVihicles();
         $this->seedModels();
         $this->seedCars();
     }

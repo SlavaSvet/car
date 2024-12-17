@@ -32,7 +32,7 @@ class Car extends Model implements HasMedia
         return $this->belongsTo(TypeVihicle::class);
     }
 
-    
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('image')->singleFile();

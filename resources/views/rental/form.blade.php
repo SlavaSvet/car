@@ -9,7 +9,7 @@
         {{ session('error') }}
       </div>
     @endif
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Rental Form</h2>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Book a car</h2>
     <form action="{{ route('cars.rental.store', $car->id) }}" method="POST">
       @csrf
       <!-- Start Date -->

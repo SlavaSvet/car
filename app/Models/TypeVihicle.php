@@ -10,5 +10,5 @@ class TypeVihicle extends Model
         'name',
     ];
 
-    
+
 }

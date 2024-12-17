@@ -155,101 +155,97 @@
             </div>
         </div>
         @if($cars->isEmpty())
-            <p class="p-4 text-3xl">No cars.</p>
+            <p class="p-6 text-3xl text-center text-gray-700 font-semibold">No cars available at the moment.</p>
         @else
-            <div class="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+            <div class="mb-12 grid gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3">
 
                 @foreach($cars as $car)
-                    <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-                        <div class="h-56 w-full">
-                            <a href="{{ route('cars.show', $car->id) }}">
-                                <img class="hover:grow hover:shadow-lg" src="{{ $car->getImage()?->getUrl() }}">
+                    <div class="group relative rounded-3xl border border-gray-200 bg-gradient-to-r from-white to-gray-50 p-8 shadow-xl hover:shadow-2xl transition-all duration-500 ease-in-out">
 
+                        <!-- Car Image Section -->
+                        <div class="h-72 w-full rounded-3xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-300 group-hover:opacity-90 transition-opacity duration-300 ease-in-out">
+                            <a href="{{ route('cars.show', $car->id) }}">
+                                <img src="{{ $car->getImage()?->getUrl() }}" class="w-full h-full object-cover rounded-3xl group-hover:scale-105 transition-all duration-300 ease-in-out">
                             </a>
                         </div>
+
+                        <!-- Car Information Section -->
                         <div class="pt-6">
-                            <div class="mb-4 flex items-center justify-between gap-4 pt-4">
-                                <span class="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"> Add to favorites </span>
+                            <div class="flex items-center justify-between gap-4 pt-4">
+            <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
+              Add to favorites
+            </span>
 
-                                <div class="flex items-center justify-end gap-1">
-
-
-
-                                    <button type="button" data-tooltip-target="tooltip-add-to-favorites" class="rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                                        <span class="sr-only"> Add to Favorites </span>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" class="rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
                                         <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
                                         </svg>
                                     </button>
-                                    <div id="tooltip-add-to-favorites" role="tooltip" class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700" data-popper-placement="top">
-                                        Add to favorites
-                                        <div class="tooltip-arrow" data-popper-arrow=""></div>
-                                    </div>
                                 </div>
                             </div>
 
-                            <a href="{{ route('cars.show', $car->id) }}" class="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{{ $car->name }}</a>
+                            <!-- Car Name -->
+                            <a href="{{ route('cars.show', $car->id) }}" class="text-3xl font-semibold text-gray-800 mt-3 hover:text-gray-600 transition-all duration-300 ease-in-out">
+                                {{ $car->name }}
+                            </a>
 
-
-                            <ul class="mt-2 flex items-center gap-4">
+                            <!-- Car Details -->
+                            <ul class="mt-4 text-sm text-gray-600 space-y-2">
                                 <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
+                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                                        <path d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
                                     </svg>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Make: {{ $car->model->make->name }}</p>
-                                </li>
-
-                                <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                    </svg>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Model: {{ $car->model->name }}</p>
-                                </li>
-
-                            </ul>
-                            <ul class="mt-2 flex items-center gap-4">
-                                <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                    </svg>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vihicle: {{ $car->typeVihicle->name }}</p>
+                                    <p>Make: {{ $car->model->make->name }}</p>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                     </svg>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Vin: {{ $car->vin }}</p>
+                                    <p>Model: {{ $car->model->name }}</p>
                                 </li>
-
-                            </ul>
-                            <ul class="mt-2 flex items-center gap-4">
                                 <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                     </svg>
-                                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Year: {{ $car->year }}</p>
+                                    <p>Vehicle Type: {{ $car->typeVihicle->name }}</p>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                    </svg>
+                                    <p>VIN: {{ $car->vin }}</p>
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
+                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+                                    </svg>
+                                    <p>Year: {{ $car->year }}</p>
                                 </li>
                             </ul>
 
+                            <!-- Price and Booking Button -->
+                            <div class="mt-6 flex items-center justify-between gap-6">
+                                <p class="text-3xl font-semibold text-gray-900">£{{ $car->price }}</p>
 
-                            <div class="mt-4 flex items-center justify-between gap-4">
-                                <p class="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">£{{ $car->price }}</p>
-
-                                <a href="{{ route('cars.rental.form', $car->id) }}"  style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;" type="button" class="inline-flex items-center rounded-lg bg-info-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-info-800 focus:outline-none focus:ring-4  focus:ring-primary-300">
-                                    <svg class="-ms-2 me-2 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6" />
-                                    </svg>
-                                    Add to cart
-                                </a>
+                                @if(!$car->hasActiveRentals())
+                                    <a href="{{ route('cars.rental.form', $car->id) }}" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full px-6 py-3 text-lg shadow-xl hover:bg-gradient-to-l transition-all duration-500 ease-in-out">
+                                        Book Now
+                                    </a>
+                                @else
+                                    <div class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-green-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-white">
+                                        <div class="mt-px">has active rental</div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
-
                 @endforeach
-
             </div>
+
             {{ $cars->links() }}
         @endif
+
     </div>
 </section>
 <section class="bg-white py-8">

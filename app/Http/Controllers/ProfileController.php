@@ -15,7 +15,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $rentals = Rental::with('car')->where("user_id", Auth::user()->id)
+        $rentals = Rental::with(['car.media', 'car.model.make'])->where("user_id", Auth::user()->id)
             ->paginate();
 
         return view('profile', compact('rentals'));

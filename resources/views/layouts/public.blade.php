@@ -84,9 +84,8 @@
                     <!-- Logo -->
                     <div class="flex items-center">
                         <a href="{{ route('home') }}" class="flex items-center text-gray-800 font-bold text-xl no-underline hover:no-underline">
-                            <svg class="fill-current text-gray-800 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M5,22h14c1.103,0,2-0.897,2-2V9c0-0.553-0.447-1-1-1h-3V7c0-2.757-2.243-5-5-5S7,4.243,7,7v1H4C3.447,8,3,8.447,3,9v11 C3,21.103,3.897,22,5,22z M9,7c0-1.654,1.346-3,3-3s3,1.346,3,3v1H9V7z M5,10h2v2h2v-2h6v2h2v-2h2l0.002,10H5V10z" />
-                            </svg>
+                            <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+
                             Car Rent
                         </a>
                     </div>
@@ -139,11 +138,30 @@
                                 </button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="text-gray-800 hover:text-blue-500 transition-colors duration-200">
-                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
-                                </svg>
-                            </a>
+                            <div class="flex space-x-4 items-center">
+                                <!-- Login Button -->
+                                <div class="flex space-x-6 items-center">
+                                    <!-- Login Button -->
+                                    <a href="{{ route('login') }}" class="flex items-center space-x-2 text-gray-800 hover:text-blue-600 transition-colors duration-200">
+                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 3a3 3 0 00-3 3v12a3 3 0 003 3h6a3 3 0 003-3v-3h-2v3a1 1 0 01-1 1H9a1 1 0 01-1-1V6a1 1 0 011-1h6a1 1 0 011 1v3h2V6a3 3 0 00-3-3H9z"></path>
+                                            <path d="M15 12l-4-4v3H3v2h8v3l4-4z"></path>
+                                        </svg>
+                                        <span class="text-lg font-medium">Login</span>
+                                    </a>
+
+                                    <!-- Register Button -->
+                                    <a href="{{ route('register') }}" class="flex items-center space-x-2 text-gray-800 hover:text-green-600 transition-colors duration-200">
+                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M16 14a4 4 0 100-8 4 4 0 000 8z"></path>
+                                            <path d="M12 20c0-2.667 2-4 4-4s4 1.333 4 4v1H12v-1z"></path>
+                                            <path d="M6 11h2v2H6v2H4v-2H2v-2h2V9h2v2z"></path>
+                                        </svg>
+                                        <span class="text-lg font-medium">Register</span>
+                                    </a>
+                                </div>
+
+                            </div>
                         @endif
                     </div>
 

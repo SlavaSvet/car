@@ -88,7 +88,9 @@
                 </form>
             </div>
         @else
-            <p class="mt-4 text-center">You have already left a review for this car.</p>
+            @auth
+                <p class="mt-4 text-center">You have already left a review for this car.</p>
+            @endauth
         @endif
     </div>
 @endsection

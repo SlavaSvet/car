@@ -130,6 +130,31 @@
                 </div>
             </div>
 
+            <!-- Filter by price -->
+            <div class="relative">
+                <button id="dropdownPrice" data-dropdown-toggle="dropdown-5"
+                        class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                    Filter by Price
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div id="dropdown-5" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Price Range</h6>
+                    <div class="space-y-2 text-sm">
+                        <label for="min-price" class="block text-gray-700 dark:text-gray-100">Min Price</label>
+                        <input id="min-price" value="{{ old('min_price', $selectedMinPrice) }}"
+                               type="number" min="0" placeholder="Min price" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-purple-600">
+
+                        <label for="max-price" class="block text-gray-700 dark:text-gray-100 mt-2">Max Price</label>
+                        <input id="max-price" value="{{ old('max_price', $selectedMaxPrice) }}" type="number" min="0" placeholder="Max price" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:focus:ring-purple-600">
+
+                        <button id="apply-price" class="mt-3 w-full bg-purple-600 text-white rounded-lg py-2">Apply Price Filter</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="relative inline-block">
                 <select id="sort-year"
                         class="sort-select-year text-gray-800 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 font-medium rounded-lg text-sm px-4 py-3 shadow-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -352,6 +377,26 @@ About
         } else {
             currentUrl.searchParams.delete('price');
         }
+        window.location.href = currentUrl.toString();
+    });
+
+    document.querySelector("#apply-price").addEventListener('click', function () {
+        const minPrice = document.querySelector("#min-price").value;
+        const maxPrice = document.querySelector("#max-price").value;
+        const currentUrl = new URL(window.location.href);
+
+        if (minPrice) {
+            currentUrl.searchParams.set('min_price', minPrice);
+        } else {
+            currentUrl.searchParams.delete('min_price');
+        }
+
+        if (maxPrice) {
+            currentUrl.searchParams.set('max_price', maxPrice);
+        } else {
+            currentUrl.searchParams.delete('max_price');
+        }
+
         window.location.href = currentUrl.toString();
     });
 </script>

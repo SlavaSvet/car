@@ -49,33 +49,6 @@
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <!-- Heading & Filters -->
         <div class="flex gap-4 p-4 bg-gray-50 rounded-lg shadow-lg dark:bg-gray-800 mb-4">
-            <!-- Filter by Type Vehicle -->
-            <div class="relative">
-                <button id="dropdownDefault" data-dropdown-toggle="dropdown-1"
-                        class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Filter by Type Vehicle
-                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                </button>
-                <!-- Dropdown Menu -->
-                <div id="dropdown-1" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
-                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Type Vehicle</h6>
-                    <ul class="space-y-2 text-sm">
-                        @foreach($typeVehicles as $typeVehicle)
-                            <li class="flex items-center">
-                                <input id="vh-{{ $typeVehicle->id }}" type="checkbox" value=""
-                                       {{ in_array($typeVehicle->id, $selectedVh ?? []) ? 'checked' : '' }}
-                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600" />
-                                <label for="vh-{{ $typeVehicle->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                                    {{ $typeVehicle->name }}
-                                </label>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-
             <!-- Filter by Make -->
             <div class="relative">
                 <button id="dropdownMake" data-dropdown-toggle="dropdown-2"
@@ -123,6 +96,33 @@
                                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-yellow-600 focus:ring-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-yellow-600" />
                                 <label for="md-{{ $model->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                     {{ $model->name }}
+                                </label>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Filter by Type Vehicle -->
+            <div class="relative">
+                <button id="dropdownDefault" data-dropdown-toggle="dropdown-4"
+                        class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Filter by Type Vehicle
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <!-- Dropdown Menu -->
+                <div id="dropdown-4" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Type Vehicle</h6>
+                    <ul class="space-y-2 text-sm">
+                        @foreach($typeVehicles as $typeVehicle)
+                            <li class="flex items-center">
+                                <input id="vh-{{ $typeVehicle->id }}" type="checkbox" value=""
+                                       {{ in_array($typeVehicle->id, $selectedVh ?? []) ? 'checked' : '' }}
+                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600" />
+                                <label for="vh-{{ $typeVehicle->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                    {{ $typeVehicle->name }}
                                 </label>
                             </li>
                         @endforeach

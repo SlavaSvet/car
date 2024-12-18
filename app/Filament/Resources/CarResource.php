@@ -12,7 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model;
 
 class CarResource extends Resource
 {
@@ -28,10 +28,8 @@ class CarResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('model_id')
-                    ->relationship('model', function ($query) {
-                        $query->select('models.id', DB::raw('CONCAT(makes.name, " ", models.name) as name'))
-                            ->join('makes', 'models.make_id', '=', 'makes.id');
-                    })
+                    ->relationship('model')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->make->name}, {$record->name}")
                     ->required(),
                 Forms\Components\Select::make('type_vihicle_id')
                     ->relationship('typeVihicle', 'name')

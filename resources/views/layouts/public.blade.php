@@ -110,6 +110,7 @@
                     <!-- Authentication Links -->
                     <div class="flex items-center space-x-4">
                         @if(auth()->check())
+                            <p>Me: <span class="underline">{{ auth()->user()->name }}</span> ({{ auth()->user()->email }})</p>
                             <a href="{{ route('reviews.index') }}" class="text-gray-800 hover:text-blue-500 transition-colors duration-200">
                                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>

@@ -33,6 +33,10 @@ class Car extends Model implements HasMedia
         return $this->belongsTo(TypeVihicle::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 
     public function registerMediaCollections(): void
     {

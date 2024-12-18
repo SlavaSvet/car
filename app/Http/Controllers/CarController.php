@@ -13,7 +13,7 @@ class CarController extends Controller
 {
     public function index(Request $request)
     {
-        $cars = Car::query()->with(['media', 'model.make', 'typeVihicle']);
+        $cars = Car::query()->with(['media', 'model.make', 'typeVihicle', 'reviews']);
 
         if ($request->has('vh') && $request->vh) {
             $cars->whereIn('type_vihicle_id', Arr::wrap($request->vh));

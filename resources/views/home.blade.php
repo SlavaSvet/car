@@ -178,13 +178,13 @@
                         <div class="pt-2">
                             <div class="flex items-center justify-between gap-4 pt-4">
                                 @if(auth()->user() && auth()->user()->favorites->contains('car_id', $car->id))
-                                        <span class="bg-red-100 text-red-800 text-xs font-medium rounded-full px-4 py-2">
-                                            In Favorites
-                                        </span>
+                                    <span class="bg-red-100 text-red-800 text-xs font-medium rounded-full px-4 py-2">
+                                In Favorites
+                            </span>
                                 @else
                                     <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
-                                        Add to Favorites
-                                    </span>
+                                Add to Favorites
+                            </span>
                                 @endif
 
                                 <div class="flex items-center gap-2">
@@ -205,11 +205,32 @@
                                 </div>
                             </div>
 
-
                             <!-- Car Name -->
                             <a href="{{ route('cars.show', $car->id) }}" class="text-3xl font-semibold text-gray-800 mt-3 hover:text-gray-600 transition-all duration-300 ease-in-out">
                                 {{ $car->name }}
                             </a>
+
+                            <!-- Car Rating -->
+                            <div class="flex items-center mt-2">
+                                @php
+                                    $rating = $car->reviews->avg('rating'); // Получаем средний рейтинг машины
+                                    $fullStars = floor($rating); // Полные звезды
+                                    $halfStars = ($rating - $fullStars) >= 0.5 ? 1 : 0; // Половина звезды
+                                    $emptyStars = 5 - ($fullStars + $halfStars); // Пустые звезды
+                                @endphp
+                                    <!-- Полные звезды -->
+                                @for($i = 0; $i < $fullStars; $i++)
+                                    <svg class="w-5 h-5 text-yellow-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27l4.15 2.18-1.64-5.41 4.36-3.73-5.47-.47L12 2 9.64 10.77 4.17 11.24l4.36 3.73-1.64 5.41L12 17.27z" /></svg>
+                                @endfor
+                                <!-- Половинные звезды -->
+                                @if($halfStars)
+                                    <svg class="w-5 h-5 text-yellow-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27l4.15 2.18-1.64-5.41 4.36-3.73-5.47-.47L12 2 9.64 10.77 4.17 11.24l4.36 3.73-1.64 5.41L12 17.27z" opacity="0.5"/></svg>
+                                @endif
+                                <!-- Пустые звезды -->
+                                @for($i = 0; $i < $emptyStars; $i++)
+                                    <svg class="w-5 h-5 text-gray-400" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27l4.15 2.18-1.64-5.41 4.36-3.73-5.47-.47L12 2 9.64 10.77 4.17 11.24l4.36 3.73-1.64 5.41L12 17.27z" /></svg>
+                                @endfor
+                            </div>
 
                             <!-- Car Details -->
                             <ul class="mt-4 text-sm text-gray-600 space-y-2">
@@ -224,18 +245,6 @@
                                         <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                     </svg>
                                     <p>Model: {{ $car->model->name }}</p>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
-                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                    </svg>
-                                    <p>Vehicle Type: {{ $car->typeVihicle->name }}</p>
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
-                                        <path d="M8 7V6c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1h-1M3 18v-7c0-.6.4-1 1-1h11c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-                                    </svg>
-                                    <p>VIN: {{ $car->vin }}</p>
                                 </li>
                                 <li class="flex items-center gap-2">
                                     <svg class="h-4 w-4" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2">
@@ -268,6 +277,7 @@
 
             {{ $cars->links() }}
         @endif
+
 
     </div>
 </section>

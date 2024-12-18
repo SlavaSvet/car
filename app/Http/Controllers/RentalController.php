@@ -19,8 +19,9 @@ class RentalController extends Controller
     {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
-    
+
         $existingRental = Rental::where('car_id', $car->id)
+            ->where('status', RentalStatus::ACTIVE->value)
             ->where(function ($query) use ($startDate, $endDate) {
                 $query->whereBetween('start_date', [$startDate, $endDate])
                       ->orWhereBetween('end_date', [$startDate, $endDate])
@@ -30,7 +31,7 @@ class RentalController extends Controller
                       });
             })
             ->exists();
-    
+
         if ($existingRental) {
             return redirect()->back()->withInput()->with('error', 'The selected date range is already booked for this car.');
         }
@@ -43,7 +44,21 @@ class RentalController extends Controller
             'total_cost' => $car->price,
             'status' => RentalStatus::ACTIVE->value,
         ]);
-        
+
         return redirect()->route('dashboard')->with('success','You have rented a car');
+    }
+
+    public function cancel(Rental $rental)
+    {
+        if ($rental->user_id !== auth()->id()) {
+            abort(403, 'You are not authorized to cancel this rental.');
+        }
+
+        if ($rental->status === RentalStatus::ACTIVE->value) {
+            $rental->update(['status' => RentalStatus::CANCELLED->value]);
+            return redirect()->back()->with('success', 'Rental has been cancelled.');
+        }
+
+        return redirect()->back()->with('error', 'Rental cannot be cancelled.');
     }
 }

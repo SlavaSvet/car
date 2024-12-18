@@ -178,9 +178,9 @@
                         <!-- Car Information Section -->
                         <div class="pt-6">
                             <div class="flex items-center justify-between gap-4 pt-4">
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
-              Add to favorites
-            </span>
+                                <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
+                                  Add to favorites
+                                </span>
 
                                 <div class="flex items-center gap-2">
                                     <button type="button" class="rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
@@ -234,14 +234,16 @@
                             <div class="mt-6 flex items-center justify-between gap-6">
                                 <p class="text-3xl font-semibold text-gray-900">£{{ $car->price }}</p>
 
-                                @if(!$car->hasActiveRentals())
-                                    <a href="{{ route('cars.rental.form', $car->id) }}" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full px-6 py-3 text-lg shadow-xl hover:bg-gradient-to-l transition-all duration-500 ease-in-out">
-                                        Book Now
-                                    </a>
-                                @else
-                                    <div class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-green-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-white">
-                                        <div class="mt-px">has active rental</div>
-                                    </div>
+                                @if(auth()->check())
+                                    @if(!$car->hasActiveRentals())
+                                        <a href="{{ route('cars.rental.form', $car->id) }}" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full px-6 py-3 text-lg shadow-xl hover:bg-gradient-to-l transition-all duration-500 ease-in-out">
+                                            Book Now
+                                        </a>
+                                    @else
+                                        <div class="center relative inline-block select-none whitespace-nowrap rounded-lg bg-green-500 py-2 px-3.5 align-baseline font-sans text-xs font-bold uppercase leading-none text-white">
+                                            <div class="mt-px">has active rental</div>
+                                        </div>
+                                    @endif
                                 @endif
                             </div>
                         </div>

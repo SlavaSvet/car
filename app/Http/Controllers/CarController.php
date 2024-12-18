@@ -29,6 +29,14 @@ class CarController extends Controller
             $cars->whereIn('model_id', Arr::wrap($request->md));
         }
 
+        if ($request->has('year') && in_array($request->year, ['asc', 'desc'])) {
+            $cars->orderBy('year', $request->year);
+        }
+
+        if ($request->has('price') && in_array($request->price, ['asc', 'desc'])) {
+            $cars->orderBy('price', $request->price);
+        }
+
         $typeVehicles = TypeVihicle::cursor();
         $makes = Make::cursor();
         $models = Model::cursor();
@@ -40,6 +48,8 @@ class CarController extends Controller
                 'selectedVh' => Arr::wrap($request->vh),
                 'selectedMk' => Arr::wrap($request->mk),
                 'selectedMd' => Arr::wrap($request->md),
+                'selectedYear' => $request->year,
+                'selectedPrice' => $request->price,
             ]);
     }
 

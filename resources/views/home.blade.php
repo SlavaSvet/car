@@ -48,32 +48,26 @@
 <section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
     <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <!-- Heading & Filters -->
-        <div class="flex p-4 gap-2">
-            <div>
+        <div class="flex gap-4 p-4 bg-gray-50 rounded-lg shadow-lg dark:bg-gray-800 mb-4">
+            <!-- Filter by Type Vehicle -->
+            <div class="relative">
                 <button id="dropdownDefault" data-dropdown-toggle="dropdown-1"
-                        style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        type="button">
-                    Filter by type vehicle
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
+                        class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Filter by Type Vehicle
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <!-- Dropdown menu -->
-                <div id="dropdown-1" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700 filter-dropdown" >
-                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                        Type Vehicle
-                    </h6>
-                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <!-- Dropdown Menu -->
+                <div id="dropdown-1" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Type Vehicle</h6>
+                    <ul class="space-y-2 text-sm">
                         @foreach($typeVehicles as $typeVehicle)
                             <li class="flex items-center">
                                 <input id="vh-{{ $typeVehicle->id }}" type="checkbox" value=""
                                        {{ in_array($typeVehicle->id, $selectedVh ?? []) ? 'checked' : '' }}
-
-                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-
-                                <label  for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600" />
+                                <label for="vh-{{ $typeVehicle->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                     {{ $typeVehicle->name }}
                                 </label>
                             </li>
@@ -81,31 +75,26 @@
                     </ul>
                 </div>
             </div>
-            <div>
-                <button id="dropdownDefault" data-dropdown-toggle="dropdown-2"
-                        style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        type="button">
-                    Filter by make
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Filter by Make -->
+            <div class="relative">
+                <button id="dropdownMake" data-dropdown-toggle="dropdown-2"
+                        class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                    Filter by Make
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <!-- Dropdown menu -->
-                <div id="dropdown-2" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700 filter-dropdown" >
-                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                        Make
-                    </h6>
-                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <!-- Dropdown Menu -->
+                <div id="dropdown-2" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Make</h6>
+                    <ul class="space-y-2 text-sm">
                         @foreach($makes as $make)
                             <li class="flex items-center">
                                 <input id="mk-{{ $make->id }}" type="checkbox" value=""
                                        {{ in_array($make->id, $selectedMk ?? []) ? 'checked' : '' }}
-
-                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-
-                                <label  for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-green-600 focus:ring-green-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-green-600" />
+                                <label for="mk-{{ $make->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                     {{ $make->name }}
                                 </label>
                             </li>
@@ -113,31 +102,26 @@
                     </ul>
                 </div>
             </div>
-            <div>
-                <button id="dropdownDefault" data-dropdown-toggle="dropdown-3"
-                        style="background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1)) !important;"
-                        class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        type="button">
-                    Filter by model
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
+
+            <!-- Filter by Model -->
+            <div class="relative">
+                <button id="dropdownModel" data-dropdown-toggle="dropdown-3"
+                        class="text-white bg-yellow-600 hover:bg-yellow-700 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
+                    Filter by Model
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <!-- Dropdown menu -->
-                <div id="dropdown-3" class="z-10 hidden w-56 p-3 bg-white rounded-lg shadow dark:bg-gray-700 filter-dropdown" >
-                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
-                        Model
-                    </h6>
-                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <!-- Dropdown Menu -->
+                <div id="dropdown-3" class="absolute hidden w-56 p-3 mt-2 bg-white rounded-lg shadow-xl dark:bg-gray-700 filter-dropdown z-20">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">Model</h6>
+                    <ul class="space-y-2 text-sm">
                         @foreach($models as $model)
                             <li class="flex items-center">
                                 <input id="md-{{ $model->id }}" type="checkbox" value=""
                                        {{ in_array($model->id, $selectedMd ?? []) ? 'checked' : '' }}
-
-                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-
-                                <label  for="apple" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-yellow-600 focus:ring-yellow-500 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-yellow-600" />
+                                <label for="md-{{ $model->id }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                                     {{ $model->name }}
                                 </label>
                             </li>
@@ -145,6 +129,27 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="relative inline-block">
+                <select id="sort-year"
+                        class="sort-select-year text-gray-800 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 font-medium rounded-lg text-sm px-4 py-3 shadow-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <option value="" class="text-gray-500" {{ empty($selectedYear) ? 'selected' : '' }}>Sort by Year</option>
+                    <option value="asc" {{ $selectedYear === 'asc' ? 'selected' : '' }}>Ascending</option>
+                    <option value="desc" {{ $selectedYear === 'desc' ? 'selected' : '' }}>Descending</option>
+                </select>
+            </div>
+
+            <!-- Sorting by Price -->
+            <div class="relative inline-block">
+                <select id="sort-price"
+                        class="sort-select-price text-gray-800 bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 font-medium rounded-lg text-sm px-4 py-3 shadow-sm transition-all duration-300 ease-in-out hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <option value="" class="text-gray-500" {{ empty($selectedPrice) ? 'selected' : '' }}>Sort by Price</option>
+                    <option value="asc" {{ $selectedPrice === 'asc' ? 'selected' : '' }}>Ascending</option>
+                    <option value="desc" {{ $selectedPrice === 'desc' ? 'selected' : '' }}>Descending</option>
+                </select>
+            </div>
+
+            <!-- Reset Filters Button -->
             <div>
                 <button id="reset-filters" data-dropdown-toggle="dropdown-1"
                         style="background-color: rgb(100 120 235 / var(--tw-bg-opacity, 1)) !important;"
@@ -154,6 +159,7 @@
                 </button>
             </div>
         </div>
+
         @if($cars->isEmpty())
             <p class="p-6 text-3xl text-center text-gray-700 font-semibold">No cars available at the moment.</p>
         @else
@@ -300,12 +306,117 @@ About
         window.location.href = currentUrl.origin + currentUrl.pathname;
     });
 
+    document.querySelector("#sort-year").addEventListener('change', function () {
+        const currentUrl = new URL(window.location.href);
+        const sortValue = this.value;
+        if (sortValue) {
+            currentUrl.searchParams.set('year', sortValue);
+        } else {
+            currentUrl.searchParams.delete('year');
+        }
+        window.location.href = currentUrl.toString();
+    });
+
+    document.querySelector("#sort-price").addEventListener('change', function () {
+        const currentUrl = new URL(window.location.href);
+        const sortValue = this.value;
+        if (sortValue) {
+            currentUrl.searchParams.set('price', sortValue);
+        } else {
+            currentUrl.searchParams.delete('price');
+        }
+        window.location.href = currentUrl.toString();
+    });
 </script>
 <style>
     .filter-dropdown {
         max-height: 500px;
         overflow-y: auto;
     }
+
+    /* Стили для селекта сортировки по году */
+    .sort-select-year {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        padding-right: 30px; /* Чтобы было место для стрелки */
+        background-color: white;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sort-select-year:focus {
+        outline: none;
+        border-color: #4B5563;
+    }
+
+    .sort-select-year option {
+        color: #333;
+    }
+
+    /* Стрелка для сортировки по году */
+    .sort-select-year::-ms-expand {
+        display: none;
+    }
+
+    .sort-select-year option[value="asc"] svg,
+    .sort-select-year option[value="desc"] svg {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Стили для селекта сортировки по цене */
+    .sort-select-price {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        padding-right: 30px; /* Чтобы было место для стрелки */
+        background-color: white;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sort-select-price:focus {
+        outline: none;
+        border-color: #4B5563;
+    }
+
+    .sort-select-price option {
+        color: #333;
+    }
+
+    /* Стрелка для сортировки по цене */
+    .sort-select-price::-ms-expand {
+        display: none;
+    }
+
+    .sort-select-price option[value="asc"] svg,
+    .sort-select-price option[value="desc"] svg {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Стили стрелок (по умолчанию они направлены вниз) */
+    .sort-select-year option[value="asc"] svg,
+    .sort-select-price option[value="asc"] svg {
+        transform: rotate(180deg); /* Повернем стрелку вверх для Ascending */
+    }
+
+    .sort-select-year option[value="desc"] svg,
+    .sort-select-price option[value="desc"] svg {
+        transform: rotate(0deg); /* Стрелка вниз для Descending */
+    }
+
 </style>
 @endsection
 

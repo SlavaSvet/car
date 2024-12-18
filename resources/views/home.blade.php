@@ -175,21 +175,36 @@
                             </a>
                         </div>
 
-                        <!-- Car Information Section -->
-                        <div class="pt-6">
+                        <div class="pt-2">
                             <div class="flex items-center justify-between gap-4 pt-4">
-                                <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
-                                  Add to favorites
-                                </span>
+                                @if(auth()->user() && auth()->user()->favorites->contains('car_id', $car->id))
+                                        <span class="bg-red-100 text-red-800 text-xs font-medium rounded-full px-4 py-2">
+                                            In Favorites
+                                        </span>
+                                @else
+                                    <span class="bg-gray-100 text-gray-800 text-xs font-medium rounded-full px-4 py-2">
+                                        Add to Favorites
+                                    </span>
+                                @endif
 
                                 <div class="flex items-center gap-2">
-                                    <button type="button" class="rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-                                        <svg class="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
-                                        </svg>
-                                    </button>
+                                    <form action="{{ route('favorites.toggle', $car->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
+                                            @if(auth()->user() && auth()->user()->favorites->contains('car_id', $car->id))
+                                                <svg class="h-5 w-5 fill-red-600" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                                </svg>
+                                            @else
+                                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6C6.5 1 1 8 5.8 13l6.2 7 6.2-7C23 8 17.5 1 12 6Z" />
+                                                </svg>
+                                            @endif
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
+
 
                             <!-- Car Name -->
                             <a href="{{ route('cars.show', $car->id) }}" class="text-3xl font-semibold text-gray-800 mt-3 hover:text-gray-600 transition-all duration-300 ease-in-out">
